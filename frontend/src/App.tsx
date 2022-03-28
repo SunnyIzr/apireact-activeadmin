@@ -7,17 +7,9 @@ function App() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:3000/users')
-    .then((res) => {
-      console.log('foo bar')
-      res.json()
-      console.log(res)
-    })
-    .then((data) => {
-      console.log("NOW THEN")
-      console.log(data)
-      setData(data)
-    });
+    fetch('/api/v1/users.json')
+      .then((res) => res.json())
+      .then((data) => setData(data));
   }, [])
 
   return (
@@ -30,28 +22,12 @@ function App() {
             count is: {count}
           </button>
         </p>
-        <p>
-          Edit <code>App.tsx</code> and save to test HMR updates.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          {' | '}
-          <a
-            className="App-link"
-            href="https://vitejs.dev/guide/features.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Vite Docs
-          </a>
-        </p>
+        <div>
+          Users:
+          <ul>
+            {data.map(({id, first_name, last_name, email}: any) => <li>{id}. {first_name} {last_name}, {email}</li>)}
+          </ul>
+        </div>
       </header>
     </div>
   )
