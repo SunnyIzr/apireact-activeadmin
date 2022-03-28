@@ -1,9 +1,24 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import logo from './logo.svg'
 import './App.css'
 
 function App() {
   const [count, setCount] = useState(0)
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:3000/users')
+    .then((res) => {
+      console.log('foo bar')
+      res.json()
+      console.log(res)
+    })
+    .then((data) => {
+      console.log("NOW THEN")
+      console.log(data)
+      setData(data)
+    });
+  }, [])
 
   return (
     <div className="App">
